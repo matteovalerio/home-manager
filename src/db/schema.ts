@@ -6,3 +6,8 @@ export const usersTable = pgTable("users", {
     age: integer().notNull(),
     email: varchar({ length: 255 }).notNull().unique(),
 });
+
+export const categories = pgTable("categories", {
+    id: integer().primaryKey().generatedAlwaysAsIdentity(),
+    name: varchar({ length: 255 }).notNull(),
+})

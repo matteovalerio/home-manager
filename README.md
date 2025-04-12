@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🏡 Home Manager
 
-## Getting Started
+A simple and modern tool to manage your household expenses and incomes.
 
-First, run the development server:
+## 🚀 Getting Started
+
+### 1. Start a PostgreSQL instance
+
+You can use Docker, a local installation, or any hosted service.
+
+> Example with Docker:
+
+```bash
+docker run --name home-manager-db -e POSTGRES_PASSWORD=yourpassword -p 5432:5432 -d postgres
+```
+
+### 2. Configure the environment
+
+Create a .env file based on the .env.example file provided:
+
+```bash
+cp .env.example .env
+```
+
+Then fill in the required environment variables.
+
+### 3. Sync the database
+
+Push the drizzle schema to your database:
+
+```bash
+npm run db:push
+Or using another package manager:
+
+yarn db:push
+
+pnpm db:push
+
+bun db:push
+```
+
+### 4. Start the development server
 
 ```bash
 npm run dev
-# or
+Or:
+
 yarn dev
-# or
+
 pnpm dev
-# or
+
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 🛠 Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Next.js
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+TypeScript
 
-## Learn More
+Tailwind CSS
 
-To learn more about Next.js, take a look at the following resources:
+Prisma + PostgreSQL
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Shadcn UI + Radix
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 📂 Project Structure
 
-## Deploy on Vercel
+/app: Application routes
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+app/modules: Domain-specific features (e.g. categories, expenses)
+../components: UI components and form helpers
+../schemas: Zod schemas and validation logic
+../queries: queries
+../mutation: mutations
+../server: server actions
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 💡 Features
+
+[x] Track expenses
+[ ] Track incomes
+[x] Categorize transactions
+[x] Clean and responsive UI
+
+### 📦 Requirements
+
+Node.js 20+
+
+PostgreSQL instance
+
+Package manager (npm, yarn, pnpm, or bun)
+
+### 📣 License
+
+MIT – feel free to use, modify, and share!

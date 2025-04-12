@@ -1,13 +1,35 @@
-import { integer, pgTable, varchar } from "drizzle-orm/pg-core";
+import {
+  date,
+  doublePrecision,
+  foreignKey,
+  integer,
+  pgTable,
+  timestamp,
+  varchar,
+} from "drizzle-orm/pg-core";
 
-export const usersTable = pgTable("users", {
-    id: integer().primaryKey().generatedAlwaysAsIdentity(),
-    name: varchar({ length: 255 }).notNull(),
-    age: integer().notNull(),
-    email: varchar({ length: 255 }).notNull().unique(),
-});
+const pk = () => integer().primaryKey().generatedAlwaysAsIdentity();
 
 export const categories = pgTable("categories", {
-    id: integer().primaryKey().generatedAlwaysAsIdentity(),
+  id: pk(),
+  name: varchar({ length: 255 }).notNull(),
+});
+
+export const expenses = pgTable(
+  "expenses",
+  {
+    id: pk(),
     name: varchar({ length: 255 }).notNull(),
-})
+    amount: doublePrecision().notNull(),
+    categoryId: integer().notNull(),
+    //
+    paidAt: timestamp().notNull().defaultNow(),
+  },
+  (table) => [
+    foreignKey({
+      columns: [table.categoryId],
+      foreignColumns: [categories.id],
+      name: "exp_category_id_fk",
+    }),
+  ]
+);

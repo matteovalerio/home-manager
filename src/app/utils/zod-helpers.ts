@@ -8,11 +8,11 @@ import { z } from "zod";
  */
 export const toNumber = (
   schema: z.ZodNumber = z.number()
-): z.ZodEffects<z.ZodTypeAny, number, unknown> =>
+): z.ZodEffects<z.ZodTypeAny, number, number> =>
   z.preprocess((val) => {
     if (typeof val === "string" && val.trim() !== "") {
       const parsed = Number(val);
       return isNaN(parsed) ? undefined : parsed;
     }
     return val;
-  }, schema);
+  }, schema) as z.ZodEffects<z.ZodTypeAny, number, number>;

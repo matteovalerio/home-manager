@@ -1,7 +1,21 @@
-import { BiCategory, BiEdit, BiPlus, BiHome, BiLabel } from "react-icons/bi";
+import {
+  BiCategory,
+  BiEdit,
+  BiPlus,
+  BiHome,
+  BiLabel,
+  BiUser,
+} from "react-icons/bi";
 import { BsGear } from "react-icons/bs";
 
-type IconName = "category" | "edit" | "add" | "home" | "settings" | "item";
+type IconName =
+  | "category"
+  | "edit"
+  | "add"
+  | "home"
+  | "settings"
+  | "item"
+  | "user";
 
 export function Icon(props: { icon: IconName }) {
   switch (props.icon) {
@@ -17,5 +31,7 @@ export function Icon(props: { icon: IconName }) {
       return <BsGear />;
     case "item":
       return <BiLabel />;
+    case "user":
+      return <BiUser />;
   }
 }

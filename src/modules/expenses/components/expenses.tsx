@@ -39,6 +39,7 @@ export function Expenses() {
         <Button
           variant={"outline"}
           className="shrink-0"
+          type="button"
           onClick={() => setIsSheetOpen(true)}
         >
           <Icon icon="add" />
@@ -58,7 +59,7 @@ export function Expenses() {
             <TableHead>Nome</TableHead>
             <TableHead>Categoria</TableHead>
             <TableHead>Data pagamento</TableHead>
-            <TableHead className="text-right">€</TableHead>
+            <TableHead className="text-right">Importo</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -72,7 +73,7 @@ export function Expenses() {
                 <div>{fns.formatDate(expense.paidAt, "dd-MM-yyyy")}</div>
               </TableCell>
               <TableCell className="font-mono text-right">
-                {expense.amount}
+                {`${expense.amount} €`}
               </TableCell>
             </TableRow>
           ))}

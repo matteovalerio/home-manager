@@ -13,6 +13,8 @@ import { Form } from "@/components/ui/form";
 import { Alert } from "@/components/ui/alert";
 import { useCategoriesQuery } from "@/modules/categories/queries/categories.queries";
 import { CategoryRead } from "@/modules/categories/schemas/category-read";
+import { UserRead } from "@/modules/users/schemas/user-read";
+import { useUsersQuery } from "@/modules/users/queries/user.queries";
 
 type Props = {
   onDone?: () => void;
@@ -20,16 +22,18 @@ type Props = {
 
 export function ExpenseCreate(props: Props) {
   const { data: categories } = useCategoriesQuery();
+  const { data: users } = useUsersQuery();
 
-  if (!categories) {
+  if (!categories || !users) {
     return <div>Loading...</div>;
   }
 
-  return <InternalForm categories={categories} {...props} />;
+  return <InternalForm categories={categories} users={users} {...props} />;
 }
 
 function InternalForm(props: {
   categories: CategoryRead[];
+  users: UserRead[];
   onDone?: () => void;
 }) {
   const form = useForm<ExpenseUpsert>({
@@ -58,7 +62,11 @@ function InternalForm(props: {
         onSubmit={form.handleSubmit(onValidSubmit)}
         className="flex flex-col gap-4"
       >
-        <ExpenseUpsertSubform form={form} categories={props.categories} />
+        <ExpenseUpsertSubform
+          form={form}
+          categories={props.categories}
+          users={props.users}
+        />
 
         {mutation.isError && (
           <Alert variant={"destructive"}>

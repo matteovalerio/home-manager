@@ -1,5 +1,6 @@
 export const routes = {
-    settings: "/settings",
-    categories: "/settings/categories",
-    home: "/"
-}
+  settings: "/settings",
+  categories: "/settings/categories",
+  users: "/settings/users",
+  home: "/",
+};

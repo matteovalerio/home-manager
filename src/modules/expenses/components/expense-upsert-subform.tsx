@@ -1,39 +1,34 @@
 "use client";
 
 import { FInput } from "@/components/f-input";
+import { FSelect } from "@/components/f-select";
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
 import {
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { cn } from "@/lib/utils";
-import * as fns from "date-fns";
-import { CalendarIcon, Link } from "lucide-react";
-import { UseFormReturn } from "react-hook-form";
-import { ExpenseUpsert } from "../schemas/expense-upsert-schema";
-import { CategoryRead } from "@/modules/categories/schemas/category-read";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
+import { CategoryRead } from "@/modules/categories/schemas/category-read";
+import * as fns from "date-fns";
+import { CalendarIcon } from "lucide-react";
+import { UseFormReturn } from "react-hook-form";
+import { ExpenseUpsert } from "../schemas/expense-upsert-schema";
+import { UserRead } from "@/modules/users/schemas/user-read";
 
 type Props = {
   onDone?: () => void;
   form: UseFormReturn<ExpenseUpsert>;
   categories: CategoryRead[];
+  users: UserRead[];
 };
 
 export function ExpenseUpsertSubform(props: Props) {
@@ -66,7 +61,7 @@ export function ExpenseUpsertSubform(props: Props) {
                     {field.value ? (
                       fns.format(field.value, "dd-MM-yyyy")
                     ) : (
-                      <span>Pick a date</span>
+                      <span>Seleziona una data</span>
                     )}
                     <CalendarIcon className="ml-auto h-4 w-4" />
                   </Button>
@@ -86,30 +81,26 @@ export function ExpenseUpsertSubform(props: Props) {
         )}
       />
 
-      <FormField
-        control={props.form.control}
+      <FSelect
         name="categoryId"
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Categoria</FormLabel>
-            <Select onValueChange={field.onChange}>
-              <FormControl>
-                <SelectTrigger>
-                  <SelectValue placeholder="Seleziona una categoria" />
-                </SelectTrigger>
-              </FormControl>
-              <SelectContent>
-                {props.categories.map((category) => (
-                  <SelectItem key={category.id} value={category.id.toString()}>
-                    {category.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+        label="Categoria"
+        placeholder="Seleziona una categoria"
+        control={props.form.control}
+        options={props.categories.map((e) => ({
+          label: e.name,
+          value: e.id.toString(),
+        }))}
+      />
 
-            <FormMessage />
-          </FormItem>
-        )}
+      <FSelect
+        name="payerUserId"
+        label="Pagante"
+        placeholder="Seleziona un utente"
+        control={props.form.control}
+        options={props.users.map((e) => ({
+          label: e.name,
+          value: e.id.toString(),
+        }))}
       />
     </>
   );

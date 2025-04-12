@@ -31,7 +31,7 @@ export function Categories() {
         <div className="ml-auto" />
         <Sheet>
           <SheetTrigger asChild>
-            <Button variant="outline" className="shrink-0">
+            <Button variant="outline" className="shrink-0" type="button">
               <Icon icon="add" />
             </Button>
           </SheetTrigger>

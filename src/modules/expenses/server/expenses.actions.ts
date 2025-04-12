@@ -26,5 +26,6 @@ export async function expenseCreate(dto: ExpenseUpsert) {
     amount: dto.amount,
     paidAt: dto.paidAt,
     categoryId: dto.categoryId,
+    payerUserId: dto.payerUserId,
   });
 }

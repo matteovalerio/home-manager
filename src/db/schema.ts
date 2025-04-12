@@ -22,6 +22,9 @@ export const expenses = pgTable(
     name: varchar({ length: 255 }).notNull(),
     amount: doublePrecision().notNull(),
     categoryId: integer().notNull(),
+    payerUserId: integer()
+      .notNull()
+      .references(() => users.id),
     //
     paidAt: timestamp().notNull().defaultNow(),
   },
@@ -33,3 +36,8 @@ export const expenses = pgTable(
     }),
   ]
 );
+
+export const users = pgTable("users", {
+  id: pk(),
+  name: varchar({ length: 255 }).notNull(),
+});

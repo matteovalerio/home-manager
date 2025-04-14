@@ -2,13 +2,12 @@
 
 import { Control, FieldPath, FieldValues } from "react-hook-form";
 import {
+  FormControl,
   FormField,
   FormItem,
   FormLabel,
-  FormControl,
   FormMessage,
 } from "./ui/form";
-import { Input } from "./ui/input";
 import {
   Select,
   SelectContent,

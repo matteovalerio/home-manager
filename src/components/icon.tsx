@@ -1,13 +1,5 @@
 import { Home, Settings } from "lucide-react";
-import {
-  BiCategory,
-  BiEdit,
-  BiPlus,
-  BiHome,
-  BiLabel,
-  BiUser,
-} from "react-icons/bi";
-import { BsGear } from "react-icons/bs";
+import { BiCategory, BiEdit, BiLabel, BiPlus, BiUser } from "react-icons/bi";
 
 type IconName =
   | "category"

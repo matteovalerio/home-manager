@@ -1,5 +1,4 @@
 import {
-  date,
   doublePrecision,
   foreignKey,
   integer,

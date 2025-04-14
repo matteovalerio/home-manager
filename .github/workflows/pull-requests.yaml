@@ -20,3 +20,4 @@ jobs:
           cache: "npm"
       - run: npm ci
       - run: npm run build:turbo
+      - run: npm run test

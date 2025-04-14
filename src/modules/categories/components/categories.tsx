@@ -23,12 +23,14 @@ export function Categories() {
     return <InternalSkeleton />;
   }
 
+  const expenses = query.data?.filter((category) => category.isKindExpense);
+  const revenues = query.data?.filter((category) => !category.isKindExpense);
+
   return (
     <div className="flex flex-col gap-4">
       <div className="flex gap-2 text-xl items-center">
         <Icon icon="category" />
         <div>Categorie</div>
-        <div className="ml-auto" />
         <Sheet>
           <SheetTrigger asChild>
             <Button variant="outline" className="shrink-0" type="button">
@@ -44,8 +46,15 @@ export function Categories() {
           </SheetContent>
         </Sheet>
       </div>
+      <div className="text-lg font-semibold">Entrate</div>
       <div className="flex flex-wrap gap-4">
-        {query.data?.map((category) => (
+        {revenues?.map((category) => (
+          <InternalCategory key={category.id} category={category} />
+        ))}
+      </div>
+      <div className="text-lg font-semibold pt-4 border-t">Uscite</div>
+      <div className="flex flex-wrap gap-4">
+        {expenses?.map((category) => (
           <InternalCategory key={category.id} category={category} />
         ))}
       </div>

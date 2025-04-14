@@ -9,22 +9,22 @@ import {
   FormMessage,
 } from "./ui/form";
 import { Input } from "./ui/input";
+import { Switch } from "./ui/switch";
 
-type FInputProps<
+type Props<
   TFieldValues extends FieldValues,
   TName extends FieldPath<TFieldValues>
 > = {
   control: Control<TFieldValues>;
   name: TName;
   label: string;
-  placeholder?: string;
   type?: React.HTMLInputTypeAttribute;
 };
 
-export function FInput<
+export function FSwitch<
   TFieldValues extends FieldValues,
   TName extends FieldPath<TFieldValues>
->(props: FInputProps<TFieldValues, TName>) {
+>(props: Props<TFieldValues, TName>) {
   return (
     <FormField
       control={props.control}
@@ -33,10 +33,10 @@ export function FInput<
         <FormItem>
           <FormLabel className="text-sm font-semibold">{props.label}</FormLabel>
           <FormControl>
-            <Input
-              type={props.type ?? "text"}
-              placeholder={props.placeholder}
+            <Switch
               {...field}
+              checked={field.value}
+              onCheckedChange={field.onChange}
             />
           </FormControl>
           <FormMessage />

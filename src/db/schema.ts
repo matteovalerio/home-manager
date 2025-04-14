@@ -1,4 +1,5 @@
 import {
+  boolean,
   doublePrecision,
   foreignKey,
   integer,
@@ -12,6 +13,7 @@ const pk = () => integer().primaryKey().generatedAlwaysAsIdentity();
 export const categories = pgTable("categories", {
   id: pk(),
   name: varchar({ length: 255 }).notNull(),
+  isKindExpense: boolean().notNull(),
 });
 
 export const expenses = pgTable(
@@ -39,4 +41,18 @@ export const expenses = pgTable(
 export const users = pgTable("users", {
   id: pk(),
   name: varchar({ length: 255 }).notNull(),
+});
+
+export const revenues = pgTable("revenues", {
+  id: pk(),
+  name: varchar({ length: 255 }).notNull(),
+  amount: doublePrecision().notNull(),
+  categoryId: integer()
+    .notNull()
+    .references(() => categories.id),
+  payerUserId: integer()
+    .notNull()
+    .references(() => users.id),
+  //
+  paidAt: timestamp().notNull().defaultNow(),
 });

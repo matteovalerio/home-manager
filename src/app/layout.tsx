@@ -38,19 +38,21 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <QueryProvider>
-          <div className="border-b flex gap-4 items-center  px-4">
-            <Link
-              href={routes.home}
-              className="text-2xl flex items-center gap-2"
-            >
+          <div className="border-b flex gap-4 items-center px-4">
+            <Link href={routes.home}>
               <Icon icon="home" />
-              <span>{"Home manager"}</span>
             </Link>
+            <div className="ml-auto" />
+            <span className="text-2xl">{"Home manager"}</span>
+            <div className="ml-auto" />
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuLink href={routes.settings}>
-                    Impostazioni
+                  <NavigationMenuLink
+                    href={routes.settings}
+                    className="text-2xl "
+                  >
+                    <Icon icon="settings" />
                   </NavigationMenuLink>
                 </NavigationMenuItem>
               </NavigationMenuList>

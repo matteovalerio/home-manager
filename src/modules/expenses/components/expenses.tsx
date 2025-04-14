@@ -42,7 +42,7 @@ export function Expenses() {
   }
 
   return (
-    <>
+    <div className="flex flex-col gap-4">
       <div className="flex gap-4 items-center">
         <div className="text-xl font-semibold">Spese</div>
         <div className="ml-auto" />
@@ -95,6 +95,6 @@ export function Expenses() {
         pageSize={pageSize}
         totalItems={query.data.totalItems}
       />
-    </>
+    </div>
   );
 }

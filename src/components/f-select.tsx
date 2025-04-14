@@ -43,7 +43,7 @@ export function FSelect<
       name={props.name}
       render={({ field }) => (
         <FormItem>
-          <FormLabel>{props.label}</FormLabel>
+          <FormLabel className="text-sm font-semibold">{props.label}</FormLabel>
           <Select onValueChange={field.onChange}>
             <FormControl>
               <SelectTrigger>

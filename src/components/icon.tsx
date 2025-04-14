@@ -1,3 +1,4 @@
+import { Home, Settings } from "lucide-react";
 import {
   BiCategory,
   BiEdit,
@@ -26,9 +27,9 @@ export function Icon(props: { icon: IconName }) {
     case "add":
       return <BiPlus />;
     case "home":
-      return <BiHome />;
+      return <Home />;
     case "settings":
-      return <BsGear />;
+      return <Settings />;
     case "item":
       return <BiLabel />;
     case "user":

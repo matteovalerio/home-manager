@@ -1,18 +1,16 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import { Icon } from "@/components/icon";
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
-import { routes } from "@/routes/routes";
 import { QueryProvider } from "@/providers/query-provider";
+import { routes } from "@/routes/routes";
+import type { Metadata } from "next";
+import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
-import { Icon } from "@/components/icon";
+import "./globals.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -51,12 +49,9 @@ export default function RootLayout({
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <NavigationMenuTrigger>Settings</NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <NavigationMenuLink href={routes.settings}>
-                      Impostazioni
-                    </NavigationMenuLink>
-                  </NavigationMenuContent>
+                  <NavigationMenuLink href={routes.settings}>
+                    Impostazioni
+                  </NavigationMenuLink>
                 </NavigationMenuItem>
               </NavigationMenuList>
             </NavigationMenu>

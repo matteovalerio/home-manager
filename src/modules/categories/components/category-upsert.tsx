@@ -22,6 +22,8 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { CategoryRead } from "@/modules/categories/schemas/category-read";
+import { FInput } from "@/components/f-input";
+import { FSwitch } from "@/components/f-switch";
 
 type Props = {
   onDone?: () => void;
@@ -33,6 +35,7 @@ export function CategoryUpsert(props: Props) {
     resolver: zodResolver(categoryUpsertSchema),
     defaultValues: {
       name: props.defaultValues?.name ?? "",
+      isKindExpense: props.defaultValues?.isKindExpense ?? true,
     },
   });
 
@@ -65,19 +68,13 @@ export function CategoryUpsert(props: Props) {
         onSubmit={form.handleSubmit(onValidSubmit)}
         className="flex flex-col gap-4 px-4"
       >
-        <FormField
+        <FInput
           control={form.control}
           name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Nome</FormLabel>
-              <FormControl>
-                <Input placeholder="nome" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
+          placeholder="nome"
+          label="Nome"
         />
+        <FSwitch control={form.control} name="isKindExpense" label="Uscita" />
         <Button
           className="mt-4"
           type="submit"

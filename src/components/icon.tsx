@@ -1,4 +1,4 @@
-import { Home, Settings } from "lucide-react";
+import { ChevronLeft, ChevronRight, Home, Settings } from "lucide-react";
 import { BiCategory, BiEdit, BiLabel, BiPlus, BiUser } from "react-icons/bi";
 
 type IconName =
@@ -8,7 +8,9 @@ type IconName =
   | "home"
   | "settings"
   | "item"
-  | "user";
+  | "user"
+  | "chevronLeft"
+  | "chevronRight";
 
 export function Icon(props: { icon: IconName }) {
   switch (props.icon) {
@@ -26,5 +28,9 @@ export function Icon(props: { icon: IconName }) {
       return <BiLabel />;
     case "user":
       return <BiUser />;
+    case "chevronLeft":
+      return <ChevronLeft />;
+    case "chevronRight":
+      return <ChevronRight />;
   }
 }

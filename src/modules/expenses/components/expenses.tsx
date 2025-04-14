@@ -19,11 +19,22 @@ import {
 } from "@/components/ui/table";
 import * as fns from "date-fns";
 import { useState } from "react";
-import { useExpensesQuery } from "../queries/expenses.queries";
+import {
+  useExpensesPaginatedQuery,
+  useExpensesQuery,
+} from "../queries/expenses.queries";
 import { ExpenseCreate } from "./expense-create";
+import { paginationUtils } from "@/modules/pagination/utils/pagination.utils";
+import { Pagination } from "@/modules/pagination/components/pagination";
 
 export function Expenses() {
-  const query = useExpensesQuery();
+  // const query = useExpensesQuery();
+  const [page, setPage] = useState(paginationUtils.default.page);
+  const [pageSize, setPageSize] = useState(paginationUtils.default.pageSize);
+  const query = useExpensesPaginatedQuery({
+    page,
+    pageSize,
+  });
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
   if (!query.data) {
@@ -62,7 +73,7 @@ export function Expenses() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {query.data.map((expense) => (
+          {query.data.items.map((expense) => (
             <TableRow key={expense.id}>
               <TableCell>{expense.name}</TableCell>
               <TableCell>
@@ -78,6 +89,12 @@ export function Expenses() {
           ))}
         </TableBody>
       </Table>
+      <Pagination
+        onPageChange={setPage}
+        page={page}
+        pageSize={pageSize}
+        totalItems={query.data.totalItems}
+      />
     </>
   );
 }

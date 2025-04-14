@@ -59,11 +59,12 @@ npm i
 ### 3. Start a PostgreSQL instance
 
 You can use Docker, a local installation, or any hosted service.
+You can find a simple docker-compose.yaml file that may help you.
 
-> Example with Docker:
+> Example with Docker compose:
 
 ```bash
-docker run --name home-manager-db -e POSTGRES_PASSWORD=yourpassword -p 5432:5432 -d postgres
+docker compose up -d
 ```
 
 ### 4. Sync the database

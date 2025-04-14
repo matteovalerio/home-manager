@@ -1,10 +1,61 @@
-# 🏡 Home Manager
+# 🏠 Home Manager
 
-A simple and modern tool to manage your household expenses and incomes.
+**Track your income and expenses with a clean, modern full-stack app.**  
+Home Manager is designed to help individuals and families stay on top of their personal finances with an intuitive interface and powerful features.
 
-## 🚀 Getting Started
+---
 
-### 1. Start a PostgreSQL instance
+## 📸 Screenshot
+
+> _Add a screenshot or GIF here showing the main UI or a key user flow_
+
+---
+
+## 🚀 Live Demo
+
+> _Coming soon_  
+> _(Deploy the project to [Vercel](https://vercel.com) and link it here!)_
+
+---
+
+## 🧱 Tech Stack
+
+- **Frontend**: [Next.js](https://nextjs.org/), [React](https://react.dev/), [TypeScript](https://www.typescriptlang.org/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/), [Shadcn UI](https://ui.shadcn.com/), [Radix UI](https://www.radix-ui.com/)
+- **Backend**: [Drizzle ORM](https://orm.drizzle.team/), PostgreSQL
+- **Validation**: [Zod](https://zod.dev/)
+- **Forms**: [React Hook Form](https://react-hook-form.com/)
+- **Testing**: [Vitest](https://vitest.dev/), [Testing Library](https://testing-library.com/)
+- **CI/CD**: GitHub Actions
+
+---
+
+## 📦 Features
+
+- Add income and expense entries
+- Categorize transactions
+- View balance and history
+- Responsive design for mobile and desktop
+- Modular architecture for scalability
+
+---
+
+## 🧑‍💻 Getting Started
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/matteovalerio/home-manager.git
+cd home-manager
+```
+
+### 2. Install the dependency
+
+```bash
+npm i
+```
+
+### 3. Start a PostgreSQL instance
 
 You can use Docker, a local installation, or any hosted service.
 
@@ -14,17 +65,7 @@ You can use Docker, a local installation, or any hosted service.
 docker run --name home-manager-db -e POSTGRES_PASSWORD=yourpassword -p 5432:5432 -d postgres
 ```
 
-### 2. Configure the environment
-
-Create a .env file based on the .env.example file provided:
-
-```bash
-cp .env.example .env
-```
-
-Then fill in the required environment variables.
-
-### 3. Sync the database
+### 4. Sync the database
 
 Push the drizzle schema to your database:
 
@@ -39,30 +80,23 @@ pnpm db:push
 bun db:push
 ```
 
-### 4. Start the development server
+### 5. Setup env
+
+Create a .env file based on .env.example and fill in your database credentials.
+
+### 6. Launch the dev server
 
 ```bash
-npm run dev
-Or:
-
-yarn dev
-
-pnpm dev
-
-bun dev
+npm run dev:turbo
 ```
 
-### 🛠 Tech Stack
+The app will be available at http://localhost:3000.
 
-Next.js
+### 🧪 Running Tests
 
-TypeScript
-
-Tailwind CSS
-
-Prisma + PostgreSQL
-
-Shadcn UI + Radix
+```bash
+npm run test
+```
 
 ### 📂 Project Structure
 
@@ -90,6 +124,20 @@ PostgreSQL instance
 
 Package manager (npm, yarn, pnpm, or bun)
 
+### 💡 Architecture Notes
+
+Modular-first approach: every domain (e.g. transactions) is isolated in its own module
+
+Form handling with React Hook Form + Zod for robust client-side and server-side validation
+
+Drizzle ORM ensures type safety and easy migrations
+
+CI runs tests on push and pull requests
+
 ### 📣 License
 
 MIT – feel free to use, modify, and share!
+
+### 🙌 Contributions
+
+Pull requests are welcome! Feel free to open issues or suggest improvements.

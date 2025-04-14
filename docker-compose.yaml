@@ -1,0 +1,11 @@
+version: "3.8"
+
+services:
+  home-manager-db:
+    image: postgres
+    container_name: home-manager-db
+    environment:
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    restart: unless-stopped

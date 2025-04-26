@@ -2,6 +2,7 @@
 
 import { useQuery } from "@tanstack/react-query";
 import {
+  expenseGetOne,
   expensesGetAll,
   expensesGetPaginated,
 } from "../server/expenses.actions";
@@ -20,5 +21,12 @@ export function useExpensesPaginatedQuery(paginate: Paginate) {
   return useQuery({
     queryKey: [expensesQueryKey, "paginated", paginate.page, paginate.pageSize],
     queryFn: () => expensesGetPaginated(paginate),
+  });
+}
+
+export function useExpenseQuery(id: number) {
+  return useQuery({
+    queryKey: [expensesQueryKey, "by-id", id],
+    queryFn: () => expenseGetOne(id),
   });
 }

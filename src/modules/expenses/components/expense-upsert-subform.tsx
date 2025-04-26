@@ -1,9 +1,8 @@
 "use client";
 
+import { FDatePicker } from "@/components/f-date-picker";
 import { FInput } from "@/components/f-input";
 import { FSelect } from "@/components/f-select";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
 import {
   FormControl,
   FormField,
@@ -11,18 +10,11 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import { cn } from "@/lib/utils";
 import { CategoryRead } from "@/modules/categories/schemas/category-read";
-import * as fns from "date-fns";
-import { CalendarIcon } from "lucide-react";
-import { UseFormReturn } from "react-hook-form";
-import { ExpenseUpsert } from "../schemas/expense-upsert-schema";
 import { UserRead } from "@/modules/users/schemas/user-read";
+import { UseFormReturn, useWatch } from "react-hook-form";
+import { ExpenseUpsert } from "../schemas/expense-upsert-schema";
+import { Checkbox } from "@/components/ui/checkbox";
 
 type Props = {
   onDone?: () => void;
@@ -42,44 +34,7 @@ export function ExpenseUpsertSubform(props: Props) {
         type="number"
       />
 
-      <FormField
-        control={props.form.control}
-        name="paidAt"
-        render={({ field }) => (
-          <FormItem className="flex flex-col">
-            <FormLabel>Data pagamento</FormLabel>
-            <Popover>
-              <PopoverTrigger asChild>
-                <FormControl>
-                  <Button
-                    variant={"outline"}
-                    className={cn(
-                      "w-[240px] pl-3 text-left font-normal",
-                      !field.value && "text-muted-foreground"
-                    )}
-                  >
-                    {field.value ? (
-                      fns.format(field.value, "dd-MM-yyyy")
-                    ) : (
-                      <span>Seleziona una data</span>
-                    )}
-                    <CalendarIcon className="ml-auto h-4 w-4" />
-                  </Button>
-                </FormControl>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
-                <Calendar
-                  mode="single"
-                  selected={field.value}
-                  onSelect={field.onChange}
-                  initialFocus
-                />
-              </PopoverContent>
-            </Popover>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
+      <FDatePicker name="paidAt" control={props.form.control} label="Data" />
 
       <FSelect
         name="categoryId"
@@ -101,6 +56,54 @@ export function ExpenseUpsertSubform(props: Props) {
           label: e.name,
           value: e.id.toString(),
         }))}
+      />
+
+      <FormField
+        control={props.form.control}
+        name="chargedUserIds"
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel className="text-sm font-semibold">
+              Destinatari spesa
+            </FormLabel>
+
+            <FormControl>
+              <div className="flex flex-col gap-2">
+                {props.users.map((user) => {
+                  const id = user.id;
+                  const checked = field.value.includes(id);
+
+                  return (
+                    <label
+                      key={id}
+                      className="inline-flex items-center space-x-2"
+                    >
+                      <input
+                        type="checkbox"
+                        value={id}
+                        checked={checked}
+                        onChange={(e) => {
+                          const val = Number(e.target.value);
+                          if (e.target.checked) {
+                            field.onChange([...field.value, val]);
+                          } else {
+                            field.onChange(
+                              field.value.filter((x) => x !== val)
+                            );
+                          }
+                        }}
+                        className="h-4 w-4 rounded border-gray-300"
+                      />
+                      <span>{user.name}</span>
+                    </label>
+                  );
+                })}
+              </div>
+            </FormControl>
+
+            <FormMessage />
+          </FormItem>
+        )}
       />
     </>
   );

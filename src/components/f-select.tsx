@@ -44,7 +44,10 @@ export function FSelect<
       render={({ field }) => (
         <FormItem>
           <FormLabel className="text-sm font-semibold">{props.label}</FormLabel>
-          <Select onValueChange={field.onChange}>
+          <Select
+            onValueChange={field.onChange}
+            defaultValue={field.value?.toString()}
+          >
             <FormControl>
               <SelectTrigger>
                 <SelectValue placeholder={props.placeholder} />

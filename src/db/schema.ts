@@ -38,6 +38,16 @@ export const expenses = pgTable(
   ]
 );
 
+export const expensesDestinataries = pgTable("expenses_destinataries", {
+  id: pk(),
+  expenseId: integer()
+    .notNull()
+    .references(() => expenses.id),
+  userId: integer()
+    .notNull()
+    .references(() => users.id),
+});
+
 export const users = pgTable("users", {
   id: pk(),
   name: varchar({ length: 255 }).notNull(),

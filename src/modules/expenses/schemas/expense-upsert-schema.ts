@@ -11,6 +11,7 @@ export const expenseUpsertSchema = z.object({
   paidAt: z.date(),
   categoryId: toNumber(z.number()),
   payerUserId: toNumber(z.number()),
+  chargedUserIds: z.array(toNumber(z.number())),
 });
 
 export type ExpenseUpsert = z.infer<typeof expenseUpsertSchema>;

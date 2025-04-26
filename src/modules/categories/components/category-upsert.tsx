@@ -1,29 +1,21 @@
 "use client";
 
-import { useForm } from "react-hook-form";
 import {
   categoryUpsertSchema,
   CategoryUpsert as Upsert,
 } from "@/modules/categories/schemas/category-upsert.schema";
+import { useForm } from "react-hook-form";
 
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-  FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { FInput } from "@/components/f-input";
+import { FSwitch } from "@/components/f-switch";
+import { Button } from "@/components/ui/button";
+import { Form } from "@/components/ui/form";
 import {
   useCategoryCreateMutation,
   useCategoryUpdateMutation,
 } from "@/modules/categories/mutations/categories.mutations";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "@/components/ui/button";
 import { CategoryRead } from "@/modules/categories/schemas/category-read";
-import { FInput } from "@/components/f-input";
-import { FSwitch } from "@/components/f-switch";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 type Props = {
   onDone?: () => void;

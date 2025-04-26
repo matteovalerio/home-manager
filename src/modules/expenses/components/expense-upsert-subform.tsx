@@ -12,9 +12,8 @@ import {
 } from "@/components/ui/form";
 import { CategoryRead } from "@/modules/categories/schemas/category-read";
 import { UserRead } from "@/modules/users/schemas/user-read";
-import { UseFormReturn, useWatch } from "react-hook-form";
+import { UseFormReturn } from "react-hook-form";
 import { ExpenseUpsert } from "../schemas/expense-upsert-schema";
-import { Checkbox } from "@/components/ui/checkbox";
 
 type Props = {
   onDone?: () => void;
@@ -41,10 +40,12 @@ export function ExpenseUpsertSubform(props: Props) {
         label="Categoria"
         placeholder="Seleziona una categoria"
         control={props.form.control}
-        options={props.categories.map((e) => ({
-          label: e.name,
-          value: e.id.toString(),
-        }))}
+        options={props.categories
+          .filter((e) => e.isKindExpense)
+          .map((e) => ({
+            label: e.name,
+            value: e.id.toString(),
+          }))}
       />
 
       <FSelect

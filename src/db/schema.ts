@@ -60,9 +60,9 @@ export const revenues = pgTable("revenues", {
   categoryId: integer()
     .notNull()
     .references(() => categories.id),
-  payerUserId: integer()
+  receiverUserId: integer()
     .notNull()
     .references(() => users.id),
   //
-  paidAt: timestamp().notNull().defaultNow(),
+  receivedAt: timestamp().notNull().defaultNow(),
 });
